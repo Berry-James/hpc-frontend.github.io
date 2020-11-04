@@ -13,7 +13,7 @@ const User = {
 
     create: (userData) => {
         // send userData to backend API using fetch - POST
-        fetch('https://recorderly.herokuapp.com/api/users', {
+        fetch('https://hpc-backend.herokuapp.com/api/users', {
             method: 'post',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userData)
