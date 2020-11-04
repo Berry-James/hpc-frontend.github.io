@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Car Parts App</title>
+    <script src="https://kit.fontawesome.com/6b3561d7c5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <div id="app"></div>
+    <script src='node_modules/mustache/mustache.min.js'></script>
+    <script src='index.js' type="module"></script>
+
+    <!-- Home page template -->
+    <script type="text/template" id="template-page-home">
+        <div class="page page-home">
+            <header class="page-header">
+                <div class="nav-bar">
+                    <img class="site-title" src="./imgs/logo.png"></img>
+                    <nav id="main-nav"></nav>
+                    <nav id="side-nav"></nav>
+                </div>
+            </header>
+            <main class="page-content" id="homePage-wrapper">
+                <div class="main-search-wrapper">
+                    <span class="input-wrapper">
+                        <input type="text" placeholder="Search" class="homeSearch">
+                    </span>
+                </div>
+                <div class="main-img-wrapper">
+                    <img src="./imgs/main-img.jpg" class="main-img">
+                </div>
+                <!--
+                <p>{{intro}}</p>
+                <p>{{secondaryContent}}</p> -->
+                <div class="home-title"><h1 id="Welcome">Honda Parts Center</h1></div>
+                <div class="button-container">
+                    <a class="home-button" href="#parts">Browse parts</a>
+                    <a class="home-button" id="profBtn">null</a>
+                </div>
+                <section class="sale-container">
+                    <div class="sale-text-wrapper">
+                        <h2 class="on-sale-text">On sale</h2>
+                    </div>
+                    <div class="sale-content-fade"></div>
+                    <div class="sale-content"></div>
+                </section>
+   
+
+            </main>
+            <div class="footer">
+                <span class="footer-span">                
+                    <i class="fas fa-plane-departure"></i><p>Fast Delivery</p>
+                </span>
+                <span class="footer-span">  
+                    <i class="fas fa-dollar-sign"></i><p>No hidden fees</p>
+                </span>
+                <span class="footer-span">
+                    <i class="fas fa-globe-asia"></i><p>We ship worldwide!</p>
+                </span>
+        </div>
+
+        </div>
+    </script>
+
+     <!-- Parts page template -->
+     <script type="text/template" id="template-page-parts">
+        <div class="page page-home">
+            <header class="page-header">
+                <div class="nav-bar">
+                    <img class="site-title" src="./imgs/logo.png"></img>
+                    <nav id="main-nav"></nav>
+                    <nav id="side-nav"></nav>
+                </div>
+            </header>
+            <main class="page-content parts-page">
+                <section class="parts-header">
+                    <input type="search" id="search-input" placeholder="Search for Parts"> 
+                    <div id="search-results"></div>
+                    <p class="intro">{{intro}}</p>
+                    <div class="filter-container">
+                        <a id="vehicle-filters-text">Vehicle Filters</a>
+                        <a id="category-filters-text">Categories</a>
+
+                    </div>
+                </section>
+                <section class="filter-popups">
+                    <div id="parts-list-filters"></div>
+                    <div id="vehicle-filters"></div>
+                </section>
+                <div id="parts-list" class="parts-container"></div>
+            </main>
+        </div>
+    </script>
+
+   <!-- Cart page template -->
+   <script type="text/template" id="template-page-cart">
+    <div class="page page-cart">
+        <header class="page-header">
+            <div class="nav-bar">
+                <img class="site-title" src="./imgs/logo.png"></img>
+                <nav id="main-nav"></nav>
+                <nav id="side-nav"></nav>
+            </div>
+        </header>
+        <main class="page-content">
+            
+            <div class="parts-page-wrapper">
+                <h1 class="page-title">Cart</h1>
+                <div id="parts-list"></div>
+            
+        </div>
+        </main>
+    </div>
+    </script>
+
+    <!-- 404 page template -->
+    <script type="text/template" id="template-page-404">
+        <div class="page page-home">
+            <header class="page-header">
+                <div class="nav-bar">
+                    <img class="site-title" src="./imgs/logo.png"></img>
+                    <nav id="main-nav"></nav>
+                    <nav id="side-nav"></nav>
+                </div>
+            </header>
+            <main class="page-content">
+                <h1>404 page/file not found</h1>
+                <p>Sorry about this.</p>
+            </main>
+        </div>
+    </script>
+
+    <!-- User Profile page template -->
+    <script type="text/template" id="template-page-user-profile">
+        <div class="page page-home">
+            <header class="page-header">
+                <div class="nav-bar">
+                    <img class="site-title" src="./imgs/logo.png"></img>
+                    <nav id="main-nav"></nav>
+                    <nav id="side-nav"></nav>
+                </div>
+            </header>
+            <main class="page-content">
+                <div class="userDiv">
+                    <h1 class="userName">{{ firstName }} {{ lastName }}</h1>
+                    <h2 class="vehicle_name">Drives a...</h2>
+                    <h1 class="vehicle_name">{{ vehicle }}</h1> 
+                </div>
+                <img src="{{ vehicleImg }}" class="vehicle_img">
+            </main>
+        </div>
+    </script>
+
+    <!-- Sign Up Page template -->
+    <script type="text/template" id="template-page-sign-up">
+        <div class="page page-home">
+            <header class="page-header">
+                <div class="nav-bar">
+                    <img class="site-title" src="./imgs/logo.png"></img>
+                    <nav id="main-nav"></nav>
+                    <nav id="side-nav"></nav>
+                </div>
+            </header>
+            <main class="page-content">
+                <div class="form-wrapper-signup">
+                <h1 class="signUpTitle">Sign Up</h1>
+                <form action="" method="post" id="form-sign-up" class="inline-form">
+                    <div class="field">
+                        <input type="text" class="input" name="first_name" placeholder="First Name">
+                    </div>
+                    <div class="field">
+                        <input type="text" class="input" name="last_name" placeholder="Last Name">
+                    </div>
+                    <div class="field">
+                        <input type="email" class="inputSignUp" name="email" placeholder="Email">
+                    </div>
+                    <div class="field">
+                        <input type="password" class="inputSignUp" name="password" placeholder="Password">
+                    </div>
+                    <label class="label" for="vehicleSelect">Select your Vehicle</label>
+                    <select id="vehicleSelect" name="vehicle" placeholder="selet vehicle">
+                        <option value="1988 Honda CRX" class="option">Honda CRX (1988-1998)</option>
+                        <option value="1988 Honda CIVIC" class="option">Honda CIVIC (1988-1991)</option>
+                        <option value="1988 Honda PRELUDE" class="option">Honda PRELUDE (1988-1991)</option>
+                        <option value="1989 Honda INTEGRA" class="option">Honda INTEGRA (1989-1993)</option>
+                    </select>   
+                    <div class="field">
+                        <input type="submit" value="Sign Up" class="button" id="submitButton">
+                    </div>
+                </form>
+            </div>
+            <img src="/imgs/create.jpg" class="vehicle_img">
+            </main>
+        </div>
+    </script>
+
+    <!-- Sign In Page template -->
+    <script type="text/template" id="template-page-sign-in">
+        <div class="page page-home">
+            <header class="page-header">
+                <div class="nav-bar">
+                    <img class="site-title" src="./imgs/logo.png"></img>
+                    <nav id="main-nav"></nav>
+                    <nav id="side-nav"></nav>
+                </div>
+            </header>
+            <main class="page-content">
+                <div class="backdrop-filter"></div>
+                <div class="form-wrapper">
+                <div class="top-img">
+                    <img src="./imgs/main-img.jpg">
+                </div>
+                <h1>Sign In</h1>
+                <form action="" method="post" id="form-sign-in" class="inline-form">
+                    <div class="field">
+                        <input type="email" class="input" name="email" placeholder="Email">
+                    </div>
+                    <div class="field">
+                        <input type="password" class="input" name="password" placeholder="Password">
+                    </div>
+                    <div class="field">
+                        <input type="submit" value="Sign In" class="signIn-btn">
+                    </div>
+                        <a class="create_acc" href="#signUp">Create Account</a>
+                </form>
+            </div>
+            <img src="imgs\create.jpg" class="vehicle_img">
+            </main>
+        </div>
+    </script>
+
+    <!-- Part entry template -->
+    <script type="text/template" id="template-part-entry">
+        
+        </span>
+        <div class="content">
+            <div class="part-entry-text-wrapper">
+                <h3 class="part_name">{{ part_name }}</h3>
+                <div class="part_number">{{ part_number }}</div>
+                <p class="category">{{ category }}</p>
+                <button class="button view-part-btn">View Part</button>
+                <p class="cart-txt"><b>Item in cart</b></p>
+                <span class="cart-icon">
+                    <i class="fas fa-cart-arrow-down"></i>
+                </span>
+            </div>
+        </div>
+        <img src="{{ part_image }}" alt="Part Image" class="part-image">
+    </script>
+
+    <!-- Part modal template -->
+    <script type="text/template" id="template-part-modal">
+        <div class="part-modal">
+            <div class="content modal-text">
+                <h2 class="part_name">{{ part_name }}</h2>
+                <div class="manufacturer">{{ manufacturer }}</div>
+                <div class="part_number">Part Number {{ part_number }}</div>
+                
+                <p class="category"><b>Category:</b> {{ category }}</p>
+                <p class="vehicle_fitment"><b>Fits:</b> {{ vehicle_fitment }}</p>
+                <div class="price">Price: $ {{ price }}</div>
+                <button class="button cart-btn">Add to Cart</button>
+            </div>
+            <img src="{{ part_image }}" alt="Part Image" class="part-image-modal">
+        </div>
+    </script>
+
+     <!-- Sign out modal template -->
+     <script type="text/template" id="template-signOut-modal">
+        <div class="signOut-modal">
+
+            <div class="content">
+                <div class="signOutModal">
+                <h2 class="signOut-text">Are you sure you want to sign out?</h2>
+                <button class="button" id="logOut-btn">Sign Out</button>
+                <button class="button" id="cancel-btn">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </script>
+
+    <!-- Vehicle select modal template -->
+    <script type="text/template" id="template-vehicle-modal">
+    <div class="vehicle-modal">
+        <div class="content">
+        </div>
+    </div>
+    </script>
+    
+</body>
+</html>
