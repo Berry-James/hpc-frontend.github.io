@@ -10,7 +10,7 @@ const Part = {
         // return new promise
         return new Promise((resolve, reject) => {
         // fetch parts.json
-        fetch('https://recorderly.herokuapp.com/api/parts')
+        fetch('https://hpc-backend.herokuapp.com/api/parts')
         .then(res => res.json())
         .then(parts => {
             resolve(parts);
@@ -26,7 +26,7 @@ const Part = {
         // return new promise
         return new Promise((resolve, reject) => {
         // fetch parts.json
-        fetch('https://recorderly.herokuapp.com/api/categories')
+        fetch('https://hpc-backend.herokuapp.com/api/categories')
         .then(res => res.json())
         .then(categories => {
             resolve(categories);
@@ -42,7 +42,7 @@ const Part = {
         // return new promise
         return new Promise((resolve, reject) => {
         // fetch vehicles.json
-        fetch('https://recorderly.herokuapp.com/api/vehicles')
+        fetch('https://hpc-backend.herokuapp.com/api/vehicles')
         .then(res => res.json())
         .then(vehicles => {
             resolve(vehicles);
@@ -57,7 +57,7 @@ const Part = {
         // return new promise
         return new Promise((resolve, reject) => {
         // fetch parts
-        let url = new URL('https://recorderly.herokuapp.com/api/parts');
+        let url = new URL('https://hpc-backend.herokuapp.com/api/parts');
         let params = { vehicle: vehicleId};
         url.search = new URLSearchParams(params).toString();
 
@@ -78,7 +78,7 @@ const Part = {
         // return new promise
         return new Promise((resolve, reject) => {
         // fetch parts
-        let url = new URL('https://recorderly.herokuapp.com/api/parts');
+        let url = new URL('https://hpc-backend.herokuapp.com/api/parts');
         let params = { ids: ids};
         url.search = new URLSearchParams(params).toString();
 
@@ -99,7 +99,7 @@ const Part = {
         // return new promise
         return new Promise((resolve, reject) => {
         // fetch parts
-        let url = new URL('https://recorderly.herokuapp.com/api/parts');
+        let url = new URL('https://hpc-backend.herokuapp.com/api/parts');
         let params = { name: partName};
         url.search = new URLSearchParams(params).toString();
 
@@ -119,7 +119,7 @@ const Part = {
         // return new promise
         return new Promise((resolve, reject) => {
         // fetch parts
-        let url = new URL('https://recorderly.herokuapp.com/api/parts');
+        let url = new URL('https://hpc-backend.herokuapp.com/api/parts');
         let params = { category: categoryId};
         url.search = new URLSearchParams(params).toString();
 
