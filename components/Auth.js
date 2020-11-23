@@ -2,24 +2,25 @@ import { App } from "./App.js";
 import { Notify } from "./Notify.js";
 import { User } from "./User.js";
 import { Modal } from "./Modal.js";
+import { Loader } from "./Loader.js";
 
 const Auth = {
     authenticated: false,
     signIn: (userData) => {
         // send userData to backend API using fetch - POST
+        Loader.showBG(App.rootEL);
         fetch('https://hpc-backend.herokuapp.com/api/auth/signin', {
             method: 'post',
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(userData)
         })
         .then(res => {
-            console.log(res);
             if(res.status !=200){
                 // problem signing in
                 res.json().then(res => {
                     Notify.show(res.message);
                 });
-               
+               Loader.remove(App.rootEL);
             }else{
                 // sign in success
                 res.json().then(res => {
@@ -33,10 +34,12 @@ const Auth = {
                     User.email = res.user.email;
                     User.vehicle = res.user.vehicle;
 
+                    Loader.remove(App.rootEL);
+
                     // 4. redirect to homepage
                     location.hash = '#';
                     // 5. show welcome notification
-                    Notify.show(`Welcome ${User.firstName}`)
+                    Notify.show(`👋 Welcome ${User.firstName}`)
                     
                 });
             }
@@ -71,7 +74,6 @@ const Auth = {
                 }else{
                     // token valid!
                     res.json().then(res => {
-                        console.log("user authorised");
                         // set Auth.authenticated = true
                         Auth.authenticated = true;
                         // set user Info (res.user)
@@ -129,7 +131,7 @@ const Auth = {
         // set Auth.authenticated to false
         Auth.authenticated = false;
         // redirect to sign in page
-        location.hash = '#signIn';
+        location.hash = '#';
         Notify.show('You have been signed out');
     }
 }

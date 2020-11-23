@@ -1,0 +1,25 @@
+// IMPORTS
+@import './var.scss';
+//
+
+.error-wrap {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: $dark;
+
+    h1 {
+        font-family: $body;
+        font-weight: 600;
+        font-size: 4rem;
+        color: #fff;
+    }
+
+    p {
+        font-family: $body;
+        color: #fff;
+    }
+}

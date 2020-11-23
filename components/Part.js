@@ -2,6 +2,7 @@ import { App } from "./App.js";
 import { Modal } from "./Modal.js";
 import { User } from "./User.js";
 import { Notify } from "./Notify.js";
+import { Loader } from "./Loader.js";
 
 
 
@@ -65,7 +66,6 @@ const Part = {
         .then(res => res.json())
         .then(parts => {
             resolve(parts);
-            console.log(url);
         })
         .catch(err => {
             reject(err);
@@ -81,12 +81,11 @@ const Part = {
         let url = new URL('https://hpc-backend.herokuapp.com/api/parts');
         let params = { ids: ids};
         url.search = new URLSearchParams(params).toString();
-
+            
         fetch(url)
         .then(res => res.json())
         .then(parts => {
             resolve(parts);
-            console.log(url);
         })
         .catch(err => {
             reject(err);
@@ -107,7 +106,6 @@ const Part = {
         .then(res => res.json())
         .then(parts => {
             resolve(parts);
-            console.log(partName);
         })
         .catch(err => {
             reject(err);
@@ -127,7 +125,6 @@ const Part = {
         .then(res => res.json())
         .then(parts => {
             resolve(parts);
-            console.log(url);
         })
         .catch(err => {
             reject(err);
@@ -152,25 +149,56 @@ const Part = {
             // set part id to data.id
             partObj.el.setAttribute('id', `part-${partObj.data._id}`);
 
-            // if part is in User.cart
-            if( User.cart.includes(partObj.data._id) ){
-                partObj.el.classList.add('in-cart');
-            }
+
 
             // render HTML using mustache template
             partObj.el.innerHTML = Mustache.render(partObj.template, partObj.data);
+
             // run events()
             partObj.events();
         }
 
         // events()
         partObj.events = () => {
+
+            // if part is in User.cart
+            if( User.cart.includes(partObj.data._id) ){
+                partObj.el.classList.add('in-cart');
+                const addBtn = partObj.el.querySelector('.cart-btn')
+                addBtn.innerText = 'Remove from Cart'
+            }
+
             // get view-part-btn
             const viewPartBtn = partObj.el.querySelector('.view-part-btn');
             viewPartBtn.addEventListener('click', () => {
                 Part.showModal(partObj);
             });
+
+            const addCartBtn = partObj.el.querySelector(".cart-btn");
+
+            addCartBtn.addEventListener("click", () => {
+
+                if( User.cart.includes(partObj.data._id) ){
+                    // remove from user.cart using user.removePartFromCart
+                    User.removePartFromCart(partObj.data._id);
+                    Notify.show("Removed from Cart");
+                    const addBtn = partObj.el.querySelector('.cart-btn')
+                    addBtn.innerText = 'Add to Cart'
+                    partObj.el.classList.remove('in-cart');
+                    return;
+                }else{
+                    partObj.el.classList.add('in-cart');
+                    // else add part to user.cart using user.addPartToCart()
+                    User.addPartToCart(partObj.data._id);
+                    Notify.show("🛒 Added to cart")
+                    const addBtn = partObj.el.querySelector('.cart-btn')
+                    addBtn.innerText = 'Remove from Cart'
+    
+                }
+                
+            })
         }
+        
 
         // run render()
         partObj.render();
@@ -203,11 +231,12 @@ const Part = {
             if( User.cart.includes(partObj.data._id) ){
                 // remove from user.cart using user.removePartFromCart
                 User.removePartFromCart(partObj.data._id);
-                Notify.show("Remove from cart")
+                Notify.show("Removed from cart")
             }else{
                 // else add part to user.cart using user.addPartToCart()
                 User.addPartToCart(partObj.data._id);
-                Notify.show("Added to cart")
+                Notify.show("🛒 Added to cart")
+
             }
             // re-render our partObj.el
             partObj.render();
@@ -215,7 +244,11 @@ const Part = {
             // remove modal Modal.remove()
             Modal.remove();
         });
-    }
+    },
+
+    setFromQuery: () => {
+/*         const queryItems = 
+ */    }
 }
 
 export { Part }

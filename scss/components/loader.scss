@@ -1,0 +1,43 @@
+// IMPORTS
+@import './var.scss';
+//
+
+.loading-wrapper-fixed {
+    z-index: 51;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h4 {
+        font-family: $body;
+        color: #fff;
+    }
+}
+
+.loading-wrapper-absolute {
+    z-index: 51;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.loading-background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.7);
+}

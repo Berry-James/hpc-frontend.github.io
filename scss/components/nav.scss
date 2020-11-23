@@ -1,0 +1,121 @@
+// IMPORTS
+@import './var.scss';
+//
+
+
+.nav-bar {
+    margin-top: 15px;
+    padding: 0 25px;
+    width: 100vw;
+    height: 75px;
+    display: flex;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    
+    a {
+        text-decoration: none;
+        padding: 0.4em 1em;
+        text-transform: uppercase;
+        color: $white;
+        z-index: 2;
+
+      }
+
+      .hamburger {
+        font-size: 2rem;
+        color: #fff;
+        display: inline-flex;
+        position: relative;
+        z-index: 2;
+    }
+  }
+
+.dropdown {
+    display: inline-block;
+    cursor: default;
+
+}
+
+.drop-contents {
+    position: absolute;
+    display: none;
+    background-color: #eeeeee;
+
+    a {
+        color: $dark !important;
+        display: block;
+        cursor: pointer;
+    }
+}
+
+.dropdown:hover {
+    display: inline-block;
+
+    .drop-contents {
+        display: block;
+    }
+}
+
+
+.signInBtn {
+    background: #ff4343;
+    border-radius: 10px;
+    display: inline-flex;
+    color: $white;
+    align-items: center;
+    padding: 0.5rem 1rem !important;
+    z-index: 2;
+
+    p {
+        margin: 0;
+    }
+  
+    i {
+      margin-right: 5px;
+    }
+  }
+  
+
+
+.hamburger {
+    transition: 0.2s ease-out;
+
+}
+
+.burger-content {
+    position: fixed;
+    right: -400px;
+    width: 400px;
+    max-width: 100vw;
+    top: 0;
+    height: 100vh;
+    display: inline-flex;
+    flex-direction: column;
+    background-color: $dark;
+    padding-top: 100px;
+
+    a {
+        font-size: 1.5rem;
+        border-bottom: 1px solid rgb(72, 72, 72);
+        transition: 0.2s;
+        color: $white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    a:hover {
+        background-color: $red;
+        color: $white;
+    }
+}
+
+.is-hidden {
+    display: none;
+}  
+
+.is-rotated {
+    transform: rotate(90deg);
+    filter: invert(1);
+}

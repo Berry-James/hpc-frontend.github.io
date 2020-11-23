@@ -14,7 +14,7 @@ const Modal = {
         modalDiv.className = 'modal';
         // create ModalContent
         let modalContent = document.createElement('div');
-        modalContent.classname = 'modal-content';
+        modalContent.className = 'modal-content';
         // insert content
         modalContent.innerHTML = content;
         // create modalCloseBtn
@@ -34,7 +34,7 @@ const Modal = {
             targets: modalDiv, 
             keyframes: [
                 { opacity: 0, top: '60%', duration: 0, easing: 'easeOutCubic' },
-                { opacity: 1, top: '40%', duration: 500, easing: 'easeOutCubic' }
+                { opacity: 1, top: '0', duration: 500, easing: 'easeOutCubic' }
                 
             ]
         })
@@ -46,7 +46,6 @@ const Modal = {
         // add esc key press function to trigger Modal.remove()
         Modal.modalEscKey = (e) => {
             if(e.keyCode == 27){
-                console.log("esc key!");
                 Modal.remove();
             }
         }

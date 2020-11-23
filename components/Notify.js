@@ -2,7 +2,7 @@ import { App } from "./App.js";
 import anime from './../node_modules/animejs/lib/anime.es.js';
 
 const Notify = {
-    showDuration: 3000,
+    showDuration: 3500,
     container: null,
 
     init: () => {
@@ -12,12 +12,15 @@ const Notify = {
         document.body.appendChild(Notify.container);
     },
 
-    show: (message) => {
+    show: (message, icon) => {
         // Create notificationEntryDiv and set class
         const notificationEntryDiv = document.createElement('div');
         notificationEntryDiv.className = 'notification-entry';
-        // set innerHTML to content message
-        notificationEntryDiv.innerHTML = message;
+        const notificationText = document.createElement("p");
+        notificationText.innerText = message;
+
+        notificationEntryDiv.appendChild(notificationText);
+
         // Append notificationEntryDiv to container div
         Notify.container.appendChild(notificationEntryDiv);
         // wait for showDuration

@@ -1,0 +1,100 @@
+// IMPORTS
+@import './var.scss';
+//
+
+.is-sticky {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    transition: 0.5s;
+
+
+    .nav-bar {
+        padding: 0 10px;
+        background-color: $white;
+        margin: 0;
+        transition: 0.5s;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+
+        #side-nav {
+            .hamburger {
+                color: $dark;
+            }
+        }
+
+        #main-nav {
+
+            padding: 0;
+
+            a {
+                color: $dark;
+            }
+        }
+
+        .cart-icon {
+            color: $red;
+        }
+
+    }
+}
+
+
+@keyframes partEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.is-active-part {
+    animation: partEnter 0.3s ease-out;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes headerEnter {
+    from {
+        opacity: 0;
+        transform: translateX(-100vw);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0vw);
+
+    }
+}
+
+
+.is-active-header {
+
+    animation: headerEnter 0.8s ease-out;
+    animation-fill-mode: forwards;
+    border-bottom: 1px solid #b3b3b3 !important;
+    transition: 0.3s;
+
+    i {
+        opacity: 0;
+        animation: headerEnter 0.8s ease-out;
+        animation-delay: 0.2s;
+        animation-fill-mode: forwards;
+    }
+
+}
+
+@keyframes filterBtnEntry {
+    from {
+        transform: translateX(-15px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+.is-active-filter-btn {
+    animation: filterBtnEntry 0.4s ease-out;
+}

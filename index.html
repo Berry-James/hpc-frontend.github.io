@@ -2,18 +2,23 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>Car Parts App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Honda Performance Center" />
+    <title>Honda Parts Center</title>
     <script src="https://kit.fontawesome.com/6b3561d7c5.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./scss/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
-
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 
 </head>
 <body>
@@ -21,54 +26,186 @@
     <script src='node_modules/mustache/mustache.min.js'></script>
     <script src='index.js' type="module"></script>
 
+    <!-- Nav Bar Template -->
+    <script type="text/template" id="template-navbar">
+        <div class="nav-bar">
+            <nav id="main-nav">
+                <a href="#" class="site-title"><img src="./imgs/logo.png"></a>
+                <a href="#parts">Browse Parts</a>
+                <div class="dropdown">
+                    <a class="cat-dropdown">Categories</a>
+                    <div class="drop-contents">
+                        <a data-value="5ed8c54f3ba16383c8aef590">Engine</a>
+                        <a data-value="5ed8c54f3ba16383c8aef590">Transmission</a>
+                        <a data-value="5ed8c54f3ba16383c8aef590">Air and Fuel</a>
+                        <a data-value="5ed8c54f3ba16383c8aef590">Suspension</a>
+                        <a data-value="5ed8c54f3ba16383c8aef590">Electrical</a>
+                    </div>
+                </div>
+            </nav>
+            <nav id="side-nav">
+                <a class="signInBtn"></a>
+                <a class="cart-icon" href="#cart"><i class="fas fa-shopping-cart"></i></a>
+                <a class="hamburger"><i class="fas fa-bars"></i><a>
+                <div class="burger-content is-hidden">
+                    <a href="#parts"><i class="fas fa-car-alt"></i>View all products</a>
+                    <a><i class="fas fa-bookmark"></i>Categories</a>
+                    <a href="#signIn" class="burger-sign"><i class="fas fa-sign-in-alt"></i><span>Sign In</span></a>
+                    <a href="#userProfile"><i class="fas fa-user"></i>My Profile</a>
+                </div>
+            </nav>
+        </div>
+    </script>
+
     <!-- Home page template -->
     <script type="text/template" id="template-page-home">
+        <main class="page-content" id="homePage-wrapper">
         <div class="page page-home">
+
             <header class="page-header">
-                <div class="nav-bar">
-                    <img class="site-title" src="./imgs/logo.png"></img>
+<!--                 <div class="nav-bar">
                     <nav id="main-nav"></nav>
                     <nav id="side-nav"></nav>
-                </div>
+                </div> -->
             </header>
-            <main class="page-content" id="homePage-wrapper">
-                <div class="main-search-wrapper">
-                    <span class="input-wrapper">
-                        <input type="text" placeholder="Search" class="homeSearch">
-                    </span>
-                </div>
-                <div class="main-img-wrapper">
-                    <img src="./imgs/main-img.jpg" class="main-img">
-                </div>
-                <!--
-                <p>{{intro}}</p>
-                <p>{{secondaryContent}}</p> -->
-                <div class="home-title"><h1 id="Welcome">Honda Parts Center</h1></div>
-                <div class="button-container">
-                    <a class="home-button" href="#parts">Browse parts</a>
-                    <a class="home-button" id="profBtn">null</a>
-                </div>
-                <section class="sale-container">
-                    <div class="sale-text-wrapper">
-                        <h2 class="on-sale-text">On sale</h2>
+                <div class="hero">
+<!--                     <div class="main-img-wrapper">
+                        <img src="./imgs/hero.jpg" class="main-img">
+                    </div>  -->
+                    <div class="hero-content">
+                        <div class="home-title">
+                            <h1 id="Welcome">Honda Performance Center</h1>
+                            <h4>勧請レーシングスタイル</h4>
+                        </div>
+                        <div class="main-search-wrapper">
+                            <span class="input-wrapper">
+                                <i class="fas fa-search"></i>
+                                <input type="search" placeholder="Search" class="homeSearch">
+                            </span>
+                        </div>
+                        <div class="button-container">
+
+                        </div>
                     </div>
-                    <div class="sale-content-fade"></div>
-                    <div class="sale-content"></div>
+                </div>
+
+                <div class="home-categories">
+                    <h3>Categories</h3>
+                    <div class="icons">
+                        <div class="home-category">
+                            <img src="./imgs/icons/engine.svg">
+                            <label>Engine</label>
+                        </div>
+                        <div class="home-category">
+                            <img src="./imgs/icons/suspension.svg">
+                            <label>Suspension</label>
+    
+                        </div>
+                        <div class="home-category">
+                            <img src="./imgs/icons/steering.svg">
+                            <label>Steering</label>
+    
+                        </div>
+                        <div class="home-category">
+                            <img src="./imgs/icons/muffler.svg">
+                            <label>Exhaust</label>
+    
+                        </div>
+                        <div class="home-category">
+                            <img src="./imgs/icons/wire.svg">
+                            <label>Electrical</label>
+    
+                        </div>
+                        <div class="home-category">
+                            <img src="./imgs/icons/spark-plug.svg">
+                            <label>Fuel and Ignition</label>
+    
+                        </div>
+                    </div>
+
+                </div>
+
+                <section class="home-cont">
+
+                    <!-- BRANDS -->
+                    <article class="top-brands">
+                        <div class="title">
+                            <h2 class="header"><i class="fas fa-check"></i>Licensed Dealer</h2>
+                        </div>
+                        <div class="brands-container">
+                            <div class="brand"><img src="./imgs/brands/ktuned.png"></div>
+                            <div class="brand"><img src="./imgs/brands/hardrace.png"></div>
+                            <div class="brand"><img src="./imgs/brands/skunk2.png"></div>
+                            <div class="brand"><img src="./imgs/brands/bc.png"></div>
+                            <div class="brand"><img src="./imgs/brands/hybrid.png"></div>
+                        </div>
+                    </article>
+
+                    <!-- SALE -->
+                    <article class="sale-section">
+                        <div class="sale-container">
+                            <div>
+                                <h2 class="header"><i class="fas fa-bolt"></i>Reduced to Clear</h2>
+                            </div> 
+                            <div class="sale-content-fade"></div>
+                            <div class="sale-content"></div>
+                        </div> 
+                    </article>
+
+
+
+                    <!-- ABOUT -->
+                    <article class="about-section">
+
+                            <h2 class="header"><i class="fas fa-question"></i>About us</h2>
+                        <div class="about-content">
+                            <div>
+                                <i class="far fa-check-circle"></i>
+                                <h3>Genuine Parts</h3>
+                            </div>
+                            <div>
+                                <i class="fas fa-plane-departure"></i>
+                                <h3>Fast Shipping</h3>
+                            </div>
+                            <div>
+                                <i class="fas fa-phone"></i>
+                                <h3>7-day Support</h3>
+                            </div>
+                        </div>
+                    </article>
+
                 </section>
+
+                
+
    
 
             </main>
             <div class="footer">
-                <span class="footer-span">                
-                    <i class="fas fa-plane-departure"></i><p>Fast Delivery</p>
-                </span>
-                <span class="footer-span">  
-                    <i class="fas fa-dollar-sign"></i><p>No hidden fees</p>
-                </span>
-                <span class="footer-span">
-                    <i class="fas fa-globe-asia"></i><p>We ship worldwide!</p>
-                </span>
-        </div>
+                <div class="footer-top">
+                    <span class="footer-span">                
+                        <i class="fas fa-plane-departure"></i><p>Fast Delivery</p>
+                    </span>
+                    <span class="footer-span">  
+                        <i class="fas fa-dollar-sign"></i><p>No hidden fees</p>
+                    </span>
+                    <span class="footer-span">
+                        <i class="fas fa-globe-asia"></i><p>We ship worldwide!</p>
+                    </span>
+                </div>
+                <hr>
+                <div class="about-footer">
+                    <a id="about-btn">About</a>
+                    <div class="social-links">
+                        <a href="https://dribbble.com/JamesBerry98"><i class="fab fa-dribbble"></i></a>
+                        <a href="https://twitter.com/berry_codes"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/james-berry-bb31421b5/"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://codepen.io/James_Berry"><i class="fab fa-codepen"></i></a>
+                        <a href="https://github.com/Berry-James"><i class="fab fa-github"></i></a>
+                        <a href="http://berry.codes"><i class="fas fa-globe-asia"></i></a>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </script>
@@ -76,28 +213,39 @@
      <!-- Parts page template -->
      <script type="text/template" id="template-page-parts">
         <div class="page page-home">
-            <header class="page-header">
-                <div class="nav-bar">
-                    <img class="site-title" src="./imgs/logo.png"></img>
-                    <nav id="main-nav"></nav>
-                    <nav id="side-nav"></nav>
-                </div>
+            <header class="page-header is-sticky">
             </header>
             <main class="page-content parts-page">
                 <section class="parts-header">
-                    <input type="search" id="search-input" placeholder="Search for Parts"> 
-                    <div id="search-results"></div>
-                    <p class="intro">{{intro}}</p>
-                    <div class="filter-container">
-                        <a id="vehicle-filters-text">Vehicle Filters</a>
-                        <a id="category-filters-text">Categories</a>
-
+                    <span class="search-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="search" id="search-input" placeholder="Search for Parts"> 
+                    </span>
+                </section>
+                <div class="filter-container-cap">
+                    <i class="fas fa-filter"></i>
+                    <h2>Filters</h2>
+                </div>
+                <div class="filter-container">
+                    <div class="filters" id="vehicle-filter">
+                        <a id="vehicle-filters-text" class="filter-text">Vehicle<i class="fas fa-angle-right" id="chevron"></i></a>
+                        <div class="parts-list-filters" id="vehicle-filter-container">
+                            <a id="filters-close-btn">&times;</a>
+                        </div>
+                        <div class="parts-list-filters-backdrop"></div>
                     </div>
-                </section>
-                <section class="filter-popups">
-                    <div id="parts-list-filters"></div>
-                    <div id="vehicle-filters"></div>
-                </section>
+                    <div class="filters" id="category-filter">
+                        <a id="category-filters-text" class="filter-text">Category<i class="fas fa-angle-right" id="chevron"></i></a>
+                        <div class="parts-list-filters" id="category-filter-container">
+                            <a id="filters-close-btn">&times;</a>
+                        </div>
+                        <div class="parts-list-filters-backdrop"></div>
+                    </div>
+
+                </div>
+                <div class="query-div">
+                    <p class="query"></p>
+                </div>   
                 <div id="parts-list" class="parts-container"></div>
             </main>
         </div>
@@ -105,38 +253,64 @@
 
    <!-- Cart page template -->
    <script type="text/template" id="template-page-cart">
-    <div class="page page-cart">
-        <header class="page-header">
-            <div class="nav-bar">
-                <img class="site-title" src="./imgs/logo.png"></img>
-                <nav id="main-nav"></nav>
-                <nav id="side-nav"></nav>
-            </div>
-        </header>
-        <main class="page-content">
-            
-            <div class="parts-page-wrapper">
-                <h1 class="page-title">Cart</h1>
-                <div id="parts-list"></div>
-            
+        <div class="page page-cart">
+            <header class="page-header is-sticky"></header>
+            <main class="page-content">
+                <div class="cart-page-wrapper">
+                    <div class="cart-title">
+                        <h1>Cart</h1>
+                    </div>
+                    <div id="parts-list" class="cart-parts"></div>
+                    <div class="cart-summary">
+                        <h2>Summary</h2>
+                        <div class="summary-item">
+                            <p id="preTax">Enter promotional code</p>
+                        </div>
+                        <hr>
+                        <div class="summary-item">
+                            <p>Subtotal</p>
+                            <p id="tax"> + Tax = </p>
+                        </div>
+                        <hr>
+                        <div class="summary-item">
+                            <h2 id="postTax">Total</h2>
+                        </div>
+                        <hr>
+                        <button class="button" id="payment-btn">Proceed to payment</button>
+                    </div>
+                </div>
+            </main>
         </div>
-        </main>
-    </div>
     </script>
-
+    
+    <!-- Check out modal template -->
+    <script type="text/template" id="template-checkout-modal">
+        <div class="checkout-modal">
+            <h2>Payment</h2>
+            <h3><span id="total-price"></span></h3>
+            <div class="payment-methods">
+                <a class="button">Credit/Debit</a>
+                <a class="button">Paypal</a>
+                <a class="button">Bank Transfer</a>
+            </div>
+            <div class="checkout-inputs">
+                <input class="input" id="checkout-name" type="text" placeholder='Full Name'>
+                <input class="input" id="checkout-number" type="number" placeholder='Card No.'>
+                <input class="input" id="checkout-expiration" type="text" placeholder='Expiration'>
+                <input class="input" id="checkout-security" type="text" placeholder='Those three wacky numbers on the back'>
+            </div>
+            <button class="button">Confirm and Pay</button>
+        </div>
+    </script>
     <!-- 404 page template -->
     <script type="text/template" id="template-page-404">
         <div class="page page-home">
-            <header class="page-header">
-                <div class="nav-bar">
-                    <img class="site-title" src="./imgs/logo.png"></img>
-                    <nav id="main-nav"></nav>
-                    <nav id="side-nav"></nav>
-                </div>
-            </header>
+            <header class="page-header is-sticky"></header>
             <main class="page-content">
-                <h1>404 page/file not found</h1>
-                <p>Sorry about this.</p>
+                <div class="error-wrap">
+                    <h1>404 page/file not found</h1>
+                    <p>Sorry about this.</p>
+                </div>
             </main>
         </div>
     </script>
@@ -144,7 +318,7 @@
     <!-- User Profile page template -->
     <script type="text/template" id="template-page-user-profile">
         <div class="page page-home">
-            <header class="page-header">
+            <header class="page-header is-sticky">
                 <div class="nav-bar">
                     <img class="site-title" src="./imgs/logo.png"></img>
                     <nav id="main-nav"></nav>
@@ -153,19 +327,32 @@
             </header>
             <main class="page-content">
                 <div class="userDiv">
-                    <h1 class="userName">{{ firstName }} {{ lastName }}</h1>
-                    <h2 class="vehicle_name">Drives a...</h2>
-                    <h1 class="vehicle_name">{{ vehicle }}</h1> 
+                    <div class="user-header">
+                        <h1>My Account</h1>
+                    </div>
+                    <div class="user-details">
+                        <h2><i class="fas fa-user"></i>User details</h2>
+                        <p><strong>Name:</strong> {{ firstName }} {{ lastName }}</p>
+                        <p><strong>Email:</strong> {{ email }}</p>
+                        <p><strong>Vehicle:</strong> {{ vehicle }}</p>
+                    </div>
+                    <div class="order-history">
+                        <h2><i class="fas fa-history"></i>Order History</h2>
+                    </div>
+                    <div class="delete">
+                        <button class="button">Delete my Account</button>
+                    </div>
                 </div>
-                <img src="{{ vehicleImg }}" class="vehicle_img">
+<!--                 <img src="{{ vehicleImg }}" class="vehicle_img">
+ -->                
             </main>
         </div>
     </script>
 
     <!-- Sign Up Page template -->
     <script type="text/template" id="template-page-sign-up">
-        <div class="page page-home">
-            <header class="page-header">
+        <div class="page page-signup">
+            <header class="page-header is-sticky">
                 <div class="nav-bar">
                     <img class="site-title" src="./imgs/logo.png"></img>
                     <nav id="main-nav"></nav>
@@ -173,34 +360,47 @@
                 </div>
             </header>
             <main class="page-content">
-                <div class="form-wrapper-signup">
-                <h1 class="signUpTitle">Sign Up</h1>
-                <form action="" method="post" id="form-sign-up" class="inline-form">
-                    <div class="field">
-                        <input type="text" class="input" name="first_name" placeholder="First Name">
+                <div class="sign-in-bg-wrap">
+                    <div class="sign-in-bg"></div>
+                </div>
+                <div class="form-wrapper">
+                    <div class="form-right">
+                        <img src="./imgs/logo.png">
                     </div>
-                    <div class="field">
-                        <input type="text" class="input" name="last_name" placeholder="Last Name">
+                    <div class="form-left">
+                        <a href="#signIn">Already have an account?</a>
+                        <hr>
+                        <h1 class="signUpTitle">Sign Up</h1>
+                        <form action="" method="post" id="form-sign-up" class="inline-form">
+                            <div class="field">
+                                <i class="fas fa-user"></i>
+                                <input type="text" class="input" name="first_name" placeholder="First Name">
+                            </div>
+                            <div class="field">
+                                <i class="fas fa-user"></i>
+                                <input type="text" class="input" name="last_name" placeholder="Last Name">
+                            </div>
+                            <div class="field"> 
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" class="input" name="email" placeholder="Email">
+                            </div>
+                            <div class="field">
+                                <i class="fas fa-key"></i>
+                                <input type="password" class="input" name="password" placeholder="Password">
+                            </div>
+                            <label class="label" for="vehicleSelect">Select your Vehicle</label>
+                            <select id="vehicleSelect" name="vehicle" placeholder="selet vehicle">
+                                <option value="1988 Honda CRX" class="option">Honda CRX (1988-1998)</option>
+                                <option value="1988 Honda CIVIC" class="option">Honda CIVIC (1988-1991)</option>
+                                <option value="1988 Honda PRELUDE" class="option">Honda PRELUDE (1988-1991)</option>
+                                <option value="1989 Honda INTEGRA" class="option">Honda INTEGRA (1989-1993)</option>
+                            </select>   
+                            <div class="field">
+                                <input type="submit" value="Sign Up" class="button" id="submitButton">
+                            </div>
+                        </form>
                     </div>
-                    <div class="field">
-                        <input type="email" class="inputSignUp" name="email" placeholder="Email">
-                    </div>
-                    <div class="field">
-                        <input type="password" class="inputSignUp" name="password" placeholder="Password">
-                    </div>
-                    <label class="label" for="vehicleSelect">Select your Vehicle</label>
-                    <select id="vehicleSelect" name="vehicle" placeholder="selet vehicle">
-                        <option value="1988 Honda CRX" class="option">Honda CRX (1988-1998)</option>
-                        <option value="1988 Honda CIVIC" class="option">Honda CIVIC (1988-1991)</option>
-                        <option value="1988 Honda PRELUDE" class="option">Honda PRELUDE (1988-1991)</option>
-                        <option value="1989 Honda INTEGRA" class="option">Honda INTEGRA (1989-1993)</option>
-                    </select>   
-                    <div class="field">
-                        <input type="submit" value="Sign Up" class="button" id="submitButton">
-                    </div>
-                </form>
-            </div>
-            <img src="/imgs/create.jpg" class="vehicle_img">
+                </div>
             </main>
         </div>
     </script>
@@ -208,34 +408,38 @@
     <!-- Sign In Page template -->
     <script type="text/template" id="template-page-sign-in">
         <div class="page page-home">
-            <header class="page-header">
-                <div class="nav-bar">
-                    <img class="site-title" src="./imgs/logo.png"></img>
-                    <nav id="main-nav"></nav>
-                    <nav id="side-nav"></nav>
-                </div>
+            <header class="page-header is-sticky">
             </header>
-            <main class="page-content">
-                <div class="backdrop-filter"></div>
-                <div class="form-wrapper">
-                <div class="top-img">
-                    <img src="./imgs/main-img.jpg">
+            <main class="page-content sign-page">
+                <div class="sign-in-bg-wrap">
+                    <div class="sign-in-bg"></div>
                 </div>
-                <h1>Sign In</h1>
-                <form action="" method="post" id="form-sign-in" class="inline-form">
-                    <div class="field">
-                        <input type="email" class="input" name="email" placeholder="Email">
+                <div class="form-wrapper">
+                    <div class="form-right">
+                        <img src="./imgs/logo.png">
                     </div>
-                    <div class="field">
-                        <input type="password" class="input" name="password" placeholder="Password">
+                    <div class="form-left">
+                        <a class="create_acc">Don't have an account?</a>
+                        <hr>
+                        <h1>Sign In</h1>
+                        <form action="" method="post" id="form-sign-in" class="inline-form">
+                            <div class="field">
+                                <span class="input-underline"></span>
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" class="input" name="email" placeholder="Email">
+                            </div>
+                            <div class="field">
+                                <span class="input-underline"></span>
+                                <i class="fas fa-key"></i>
+                                <input type="password" class="input" name="password" placeholder="Password">
+                            </div>
+                            <div class="field">
+                                <input type="submit" value="Sign In" class="signIn-btn button">
+                            </div>
+
+                        </form>
                     </div>
-                    <div class="field">
-                        <input type="submit" value="Sign In" class="signIn-btn">
-                    </div>
-                        <a class="create_acc" href="#signUp">Create Account</a>
-                </form>
-            </div>
-            <img src="imgs\create.jpg" class="vehicle_img">
+                </div>
             </main>
         </div>
     </script>
@@ -245,32 +449,43 @@
         
         </span>
         <div class="content">
+            <span class="inCart-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </span>
+            <div class="img-cont">
+                <img src="{{ part_image }}" alt="Part Image" class="part-image">
+            </div>
+
             <div class="part-entry-text-wrapper">
+                <h2 class="part_manufacturer">{{ manufacturer }}</h2>
                 <h3 class="part_name">{{ part_name }}</h3>
-                <div class="part_number">{{ part_number }}</div>
-                <p class="category">{{ category }}</p>
-                <button class="button view-part-btn">View Part</button>
                 <p class="cart-txt"><b>Item in cart</b></p>
                 <span class="cart-icon">
                     <i class="fas fa-cart-arrow-down"></i>
                 </span>
+                <div class="part_price"><p>${{ price }}</p></div>
             </div>
+
         </div>
-        <img src="{{ part_image }}" alt="Part Image" class="part-image">
+        <div class="part-btns">
+            <button class="view-part-btn"><i class="fas fa-search"></i>View</button>
+            <button class="cart-btn"><i class="fas fa-shopping-cart"></i>Add to Cart</button>
+        </div>
     </script>
 
     <!-- Part modal template -->
     <script type="text/template" id="template-part-modal">
         <div class="part-modal">
             <div class="content modal-text">
-                <h2 class="part_name">{{ part_name }}</h2>
-                <div class="manufacturer">{{ manufacturer }}</div>
+                <p class="category">{{ category }}</p>
+
+                <h2 class="manufacturer">{{ manufacturer }}</h2>
+                <div class="part_name">{{ part_name }}</div>
                 <div class="part_number">Part Number {{ part_number }}</div>
                 
-                <p class="category"><b>Category:</b> {{ category }}</p>
                 <p class="vehicle_fitment"><b>Fits:</b> {{ vehicle_fitment }}</p>
-                <div class="price">Price: $ {{ price }}</div>
-                <button class="button cart-btn">Add to Cart</button>
+                <div class="part_price"><p>${{ price }}</p></div>
+                <button class="button cart-btn"><i class="fas fa-cart-plus"></i>Cart</button>
             </div>
             <img src="{{ part_image }}" alt="Part Image" class="part-image-modal">
         </div>
@@ -297,6 +512,78 @@
         <div class="content">
         </div>
     </div>
+    </script>
+
+    <!-- About Modal Template -->
+    <script type="text/template" id="template-about-modal">
+        <div class="about-modal">
+            <h1>About</h1>
+            <h3>Made by James Berry</h3>
+            <p>Version 1.0</p>
+        </div>
+    </script>
+
+
+    <!-- NEW SIGN UP -->
+    <script type="text/template" id="template-sign-up-new">
+        <a href="#signIn" id="sign-up-back">Already have an account?</a>
+        <hr>
+        <h1 class="signUpTitle">Sign Up</h1>
+        <form action="" method="post" id="form-sign-up" class="inline-form">
+            <div class="field">
+                <span class="input-underline"></span>
+                <i class="fas fa-user"></i>
+                <input type="text" class="input" name="first_name" placeholder="First Name">
+            </div>
+            <div class="field">
+                <span class="input-underline"></span>
+                <i class="fas fa-user"></i>
+                <input type="text" class="input" name="last_name" placeholder="Last Name">
+            </div>
+            <div class="field"> 
+                <span class="input-underline"></span>
+                <i class="fas fa-envelope"></i>
+                <input type="email" class="input" name="email" placeholder="Email">
+            </div>
+            <div class="field">
+                <span class="input-underline"></span>
+                <i class="fas fa-key"></i>
+                <input type="password" class="input" name="password" placeholder="Password">
+            </div>
+            <label class="label" for="vehicleSelect">Select your Vehicle</label>
+            <select id="vehicleSelect" name="vehicle" placeholder="selet vehicle">
+                <option value="1988 Honda CRX" class="option">Honda CRX (1988-1998)</option>
+                <option value="1988 Honda CIVIC" class="option">Honda CIVIC (1988-1991)</option>
+                <option value="1988 Honda PRELUDE" class="option">Honda PRELUDE (1988-1991)</option>
+                <option value="1989 Honda INTEGRA" class="option">Honda INTEGRA (1989-1993)</option>
+            </select>   
+            <div class="field">
+                <input type="submit" value="Create Account" class="button" id="submitButton">
+            </div>
+        </form>
+    </script>
+
+    <script type="text/template" id="template-sign-in-back">
+        <div class="form-left">
+            <a class="create_acc">Don't have an account?</a>
+            <hr>
+            <h1>Sign In</h1>
+            <form action="" method="post" id="form-sign-in" class="inline-form">
+                <div class="field">
+                    <span class="input-underline"></span>
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" class="input" name="email" placeholder="Email">
+                </div>
+                <div class="field">
+                    <span class="input-underline"></span>
+                    <i class="fas fa-key"></i>
+                    <input type="password" class="input" name="password" placeholder="Password">
+                </div>
+                <div class="field">
+                    <input type="submit" value="Sign In" class="signIn-btn button">
+                </div>
+            </form>
+        </div>
     </script>
     
 </body>

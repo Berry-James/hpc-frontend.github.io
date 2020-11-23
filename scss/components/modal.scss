@@ -1,0 +1,185 @@
+// IMPORTS
+@import './var.scss';
+//
+
+/* part modal */
+.part-modal {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+    align-items: center;
+    color: $dark;
+    width: 100%;
+    position: relative;
+
+    .category {
+      margin: 0;
+      color: #292929;
+    }
+
+    .content {
+        flex-grow: 1;
+      }
+
+      .part_name {
+        font-size: 1.4rem;
+        margin: 0 0 0.5em;
+        
+      }
+
+
+
+      .part_number {
+        font-size: 1rem;
+        margin-bottom: 0.5em;  
+      }
+
+      .part-image {
+        transition: 0.5s;
+      
+      }
+
+      .vehicle_fitment {
+        margin: 0;
+        margin-bottom: 15px;
+      }
+
+      .manufacturer {
+        font-family: $body;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .part_price {
+        background-color: $red;
+        color: $white;
+        font-size: 1rem;
+        font-weight: bold;
+        width: 100px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+        margin-bottom: 15px;
+
+        p {
+          margin: 0;
+        }
+    }
+
+    .cart-btn {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px; 
+      font-size: 1.2rem;
+      width: fit-content;
+      background: $dark;
+    }
+      
+      
+  }
+    
+  
+  
+  /* Modal */
+  .modal {
+    padding: 1.8rem;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+/*     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    width: fit-content;
+    max-height: 75vh;
+    overflow: scroll;
+    background: #fff;    
+    color: $dark;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+    overflow-y: auto;
+    overflow-x: auto;
+    backdrop-filter: blur(1px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  div.signOut-modal {
+    text-align: center;
+    width: 100%;
+  }
+
+  .modal-text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 60%;
+  }
+
+  
+  .modal-text button {
+    width: 200px;
+  }
+  
+  .modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding-top: 2px;
+    text-align: center;
+    background: #eee;
+    border-radius: 50%;
+    border: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    outline: none;
+    font-size: 20px;
+  }
+  
+  .modal-close-btn:hover {
+    background: #ff5252;
+    color: $white;
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(2px);
+  }
+  
+  @keyframes imgEntry {
+    0% {
+      transform: translateY(5%);
+      opacity: 0%;
+    }
+    100% {
+      tranform: translateY(0%);
+      opacity: 100%;
+    }
+  }
+  
+  .part-image-modal {
+    width: 60%;
+    max-height: 40%;
+    opacity: 100%;
+    animation: imgEntry 1s ease-out;
+  }
+  
+  

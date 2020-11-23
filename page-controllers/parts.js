@@ -4,6 +4,8 @@ import { Part } from '../components/Part.js';
 import { Notify } from '../components/Notify.js';
 import anime from './../node_modules/animejs/lib/anime.es.js';
 import { Modal } from '../components/Modal.js';
+import { Loader } from '../components/Loader.js';
+import { Observer } from '../components/Observer.js';
 
 function partsPageController(){
     let data = {
@@ -12,46 +14,55 @@ function partsPageController(){
     App.loadPage('Parts', 'template-page-parts', data, () =>{
         // get div#parts-list
         const partsListDiv = document.querySelector('#parts-list');
-        const vehicleFiltersBtn = document.querySelector("#vehicle-filters-text");
-        const vehicleFilters = document.querySelector("#vehicle-filters")
-        const categoryTxt = document.querySelector("#category-filters-text")
-        const categories = document.querySelector("#parts-list-filters")
+        const queryDiv = document.querySelector(".query-div");
+        const query = document.querySelector(".query");
 
+        // NEW STUFF
+        const filterBtns = document.querySelectorAll(".filters");
 
-        vehicleFiltersBtn.addEventListener("click", function(){
-            vehicleFilters.classList.toggle("show-filters");
-            vehicleFiltersBtn.classList.toggle("filter-active");
-            categories.classList.remove("show-filters");
-            categoryTxt.classList.remove("filter-active");
+        filterBtns.forEach(button => {
+            button.addEventListener("click", () => {
+                let content = button.querySelector(".parts-list-filters");
+                content.classList.toggle("show-filters");
+                content.querySelectorAll("a").forEach(a => {
+                    anime({
+                        begin: () => {
+                            a.classList.toggle('is-active-filter-btn');
+                            delay: anime.stagger(50);
+                        }
+                    })
+                    a.classList.toggle('is-active-filter-btn');
+                });
+                
+                button.querySelector("i").classList.toggle("chev-down");
+                anime({
+                    targets: document.querySelectorAll(".filter-btn"),
+                    opacity: 0,
+                    opacity: 1,
+                    delay: anime.stagger(200)
+                })   
+                if(document.documentElement.clientWidth <= 760 ){
+                    const backdrop = document.querySelector(".parts-list-filters-backdrop");
+                    backdrop.classList.toggle("is-active");
+                }             
+            })
         })
 
-        
-        categoryTxt.addEventListener("click", function(){
-            categories.classList.toggle("show-filters");
-            vehicleFilters.classList.remove("show-filters");
-            categoryTxt.classList.toggle("filter-active");
-            vehicleFiltersBtn.classList.remove("filter-active");
-
-
-        })
 
         // get div#parts-list-filters
-        const partsListFiltersDiv = document.querySelector('#parts-list-filters');
-        const vehicleSelectDiv = document.querySelector('#vehicle-filters');
-        const vehicleModal = document.querySelector('#template-vehicle-modal');
-        const vehicleModalContent = document.querySelector('div.modal');
-
+        const catCont = document.querySelector("#category-filter-container");
+        const vCont = document.querySelector("#vehicle-filter-container");
         // render category buttons
         Part.getCategories()
         .then(categories => {
             // loop through each category and create a button
             categories.forEach(category => {
                 // create buttons
-                let categoryBtn = document.createElement('button');
-                categoryBtn.className = 'button filter-btn';
+                let categoryBtn = document.createElement('a');
+                categoryBtn.className = 'filter-btn';
                 categoryBtn.innerText = category.name;
                 // append CategoryBtn to filters div
-                partsListFiltersDiv.appendChild(categoryBtn);
+                catCont.appendChild(categoryBtn);
                 
                 // click
                 categoryBtn.addEventListener('click', () => {
@@ -61,7 +72,7 @@ function partsPageController(){
                         btn.classList.remove('is-active');
                     });
                     // make current button active
-                    categoryBtn.classList.add('is-active');
+                    categoryBtn.classList.add('is-active', 'filter-active');
                     // clear partslistdiv content
                     partsListDiv.innerHTML = '';
                 
@@ -70,8 +81,18 @@ function partsPageController(){
                 .then(parts => {
                     parts.forEach(part => {
                         const partObj = Part.createPartObj(part);
+
                         partsListDiv.appendChild(partObj.el);
                     });
+
+                    let partsItems = document.querySelectorAll(".part-entry");
+
+                    anime({
+                        targets: partsItems,
+                        opacity: 1,
+                        delay: anime.stagger(100),
+                    })   
+
                 })
                 .catch(err => {
                     console.log(err);
@@ -91,11 +112,11 @@ function partsPageController(){
             vehicles.forEach(vehicle => {
                 
                 // create buttons
-                let vehicleBtn = document.createElement('button');
-                vehicleBtn.className = 'button filter-btn';
+                let vehicleBtn = document.createElement('a');
+                vehicleBtn.className = 'filter-btn';
                 vehicleBtn.innerText = vehicle.name;
                 // append Vehicle button to filters div
-                vehicleSelectDiv.appendChild(vehicleBtn);
+                vCont.appendChild(vehicleBtn);
                 
                 // click
                 vehicleBtn.addEventListener('click', () => {
@@ -105,7 +126,7 @@ function partsPageController(){
                         btn.classList.remove('is-active-vehicle');
                     });
                     // make current button active
-                    vehicleBtn.classList.add('is-active-vehicle');
+                    vehicleBtn.classList.add('is-active-vehicle',  'filter-active');
                     // clear partslistdiv content
                     partsListDiv.innerHTML = '';
                 
@@ -116,6 +137,19 @@ function partsPageController(){
                         const partObj = Part.createPartObj(part);
                         partsListDiv.appendChild(partObj.el);
                     });
+
+                    let partsItems = document.querySelectorAll(".part-entry");
+
+                    anime({
+                        targets: partsItems,
+                        begin: () => {
+                            partsItems.forEach(part => {
+                                part.classList.add('is-active-part');
+                            })
+                        },
+                        delay: anime.stagger(100),
+                    })   
+
                 })
                 .catch(err => {
                     console.log(err);
@@ -130,9 +164,11 @@ function partsPageController(){
 
         // create a clear filters button
         let clearFiltersBtn = document.createElement('button');
-        clearFiltersBtn.className = 'button filter-btn clear-filters';
-        clearFiltersBtn.innerText = 'All Categories / Vehicles';
-        partsListFiltersDiv.append(clearFiltersBtn);
+        const filterContainer = document.querySelector(".filter-container");
+        clearFiltersBtn.className = 'button clear-filters';
+        clearFiltersBtn.innerText = 'Clear Filters';
+        filterContainer.append(clearFiltersBtn);
+        
         // click
         clearFiltersBtn.addEventListener('click', () => {
             // remove is-active from all buttons
@@ -148,53 +184,78 @@ function partsPageController(){
 
         // get all parts
         function getAllParts(){
-        Part.get()
-        .then(parts => {
-            console.log("got parts!");
-            // loop through parts array
-            const part = document.createElement("div");
-            parts.forEach(part => { 
-                Part.createPartObj(part);
+
+            partsListDiv.innerHTML = null;  
+
+            Part.get()
+            .then(parts => {
+                // loop through parts array
+                parts.forEach(part => {     
+                    const partObj = Part.createPartObj(part);
+                    partsListDiv.appendChild(partObj.el);
+                });
+                            
+            let partsItems = document.querySelectorAll(".part-entry");
+
+            partsItems.forEach(part => {
+                Observer.parts(part);
+            })
+            })
+
+            .catch(err => {
+                console.log(err);
+                Notify.show('Problem loading parts');
             });
+    }
+    
+    function search() {
+
+        partsListDiv.innerHTML = null;  
+        let searchVal = document.querySelector("#search-input").value;
+/*         Loader.show(partsListDiv);
+ */        Part.get()
+        .then(parts => {
+            parts.forEach(part => {
+                if(part.part_name.toLowerCase().includes(searchVal.toLowerCase()) || part.manufacturer.toLowerCase().includes(searchVal.toLowerCase()) || part.part_number.toLowerCase().includes(searchVal.toLowerCase()) || part.vehicle_fitment.toLowerCase().includes(searchVal.toLowerCase())) {
+                const partObj = Part.createPartObj(part);
+                partsListDiv.appendChild(partObj.el);
+                
+   
+            }
+            if(!partsListDiv.querySelectorAll(".part-entry").indexOf == -1) {
+                const empty = document.createElement("div");
+                empty.text = document.createElement("p");
+                empty.text.innerText = 'No results were found';
+                empty.appendChild(empty.text);
+                partsListDiv.appendChild(empty);
+            }
+
+            let partsItems = document.querySelectorAll(".part-entry");
+
+            anime({
+                targets: partsItems,
+                opacity: 1,
+                delay: anime.stagger(100),
+            })   
+
+            
+            queryDiv.style.display = 'block';
+            query.innerText = `Searching for: ${searchVal}`;
+/*             Loader.remove(partsListDiv);
+ */ 
+            })
         })
-        .catch(err => {
-            console.log(err);
-            Notify.show('Problem loading parts');
-        });
-        
     }
 
-    // Search bar for part names (Not fully functional, currently can only search based on 'part_name_id' which is an ObjectId assigned to each part.  I'm leaving this in as I feel I was getting close, but not quite there yet)
-    // FOR TESTING PURPOSES, INPUTTING THE ID 5ee0b275b965a28fb8b14239 INTO THE SEARCH BOX WILL RETURN A SINGLE PART
-    // Creating a static array (would preferrably bring the array in dynamically)
-    var names = [ '5ee0b275b965a28fb8b14239', '5ee0b13bb965a28fb8b14238', 'part3' ];
-    // Search function
-    function search(){
-        // Take the input from the #search-input input box
-        let searchFor = $('#search-input').val();
-        let searchIndex = names.indexOf(searchFor);
-        // If part does not exist, show message 'no parts found'
-        if(searchIndex == -1)
-            $('#search-results').html("No parts found");
-        else{
-            // clear partsListDiv content
-            partsListDiv.innerHTML = '';
-            // Run function based on value of input field #search-input
-            Part.getByName(searchFor)
-                .then(parts => {
-                    // generate parts based on returned data
-                    parts.forEach(part => {
-                        const partObj = Part.createPartObj(part);
-                        partsListDiv.appendChild(partObj.el);
-                    });
-                })
-        }
-    }
-    // run search function on keypress
-    $('#search-input').on('keyup', search);
 
     // run function to get all parts
     getAllParts();
+
+    // search function
+    const searchBar = document.querySelector("#search-input");
+    searchBar.addEventListener("search", () => {
+        search();
+    });
 });  
 }
 

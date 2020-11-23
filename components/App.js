@@ -1,6 +1,10 @@
 import { Notify } from "./Notify.js";
 import { User } from "./User.js";
 import { Auth } from "./Auth.js";
+import { Nav } from "./Nav.js";
+import { Loader } from "./Loader.js";
+import anime from './../node_modules/animejs/lib/anime.es.js';
+import { Burger } from "./Burger.js";
 
 const App = {
     // properties
@@ -9,6 +13,7 @@ const App = {
     author: "James Berry",
     rootEL: document.querySelector("#app"),
     routes: {},
+    homeSearchStorage: [],
 
     // methods
     init: () => {
@@ -16,6 +21,7 @@ const App = {
         Auth.check(() => {
             App.router();
             window.addEventListener('hashchange', App.router);
+            User.getCart();
         
     });
 },
@@ -60,27 +66,55 @@ const App = {
         }
     },
 
+
     loadNav: () => {
-        // get main nav div
-        let sideNav = document.querySelector('#side-nav')
-        let mainNav = document.querySelector('#main-nav');
-        mainNav.innerHTML = `
-        <a href="#">Home</a>
-        <a href="#parts">Parts</a>
-        <a href="#cart" id="nav-item-cart">Cart</a>`
-        if(Auth.authenticated){
-            // signed in - show nav item (profile, sign out)
-            sideNav.innerHTML += `<a href="#userProfile"><i class="fas fa-user profile-icon"></i></a>
-            <a href="#signOut">Sign Out</a>`;
-            
-        }else{
-            // not signed in - show nav items (sign in)
-            sideNav.innerHTML += `
-            <a href="#signIn" class="signInBtn">Sign In</a>`;
+        // get nav template
+        const template = document.querySelector("#template-navbar").innerHTML;
+        let header = document.querySelector(".page-header");
+        let output = Mustache.render(template);
+        header.innerHTML = output;
+
+        let signBtn = document.querySelector(".signInBtn");
+        signBtn.tag = document.createElement("i");
+        let text = document.createElement("p");
+
+        const burgerBtn = document.querySelector(".hamburger");
+        burgerBtn.addEventListener("click", () => {
+            Burger.toggle();
+        })
+
+        if(Auth.authenticated) {
+            text.innerText = 'Sign Out';
+            signBtn.href = '#signOut';
+            signBtn.tag.classList.add("fas", "fa-sign-out-alt");
+            signBtn.appendChild(signBtn.tag);
+            signBtn.appendChild(text);
+
+
+        } else {
+            text.innerText = 'Sign In';
+            signBtn.href = "#signIn";
+            signBtn.tag.classList.add("fas", "fa-sign-in-alt");
+            signBtn.appendChild(signBtn.tag);
+            signBtn.appendChild(text);
+
         }
-        
-        App.refreshNav();
+
+        const cartBtn = document.querySelector(".cart-icon")
+        const navBar = document.querySelector(".nav-bar");
+
+        if(window.location.hash == '') {
+            cartBtn.classList.add("cart-light");
+            cartBtn.classList.remove("cart-dark");
+
+        } else {
+            cartBtn.classList.add("cart-dark");
+            cartBtn.classList.remove("cart-light");
+            navBar.classList.add("is-dark");
+        }
         User.updateCartCount();
+        Nav.events();
+
     },
 
     refreshNav: () => {
@@ -92,7 +126,19 @@ const App = {
                 navLink.classList.add('active');
         }
         });
+    },
+
+    homeSearch: () => {
+        window.location.href = "#parts"
+
+        const partsContainer = document.querySelector(".parts-container");
+        partsContainer.innerHTML = null;
+        App.homeSearchStorage.forEach(item => {
+            partsContainer.appendChild(item);
+        }) 
     }
+
+
 }
 
 export { App }
