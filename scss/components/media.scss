@@ -334,14 +334,23 @@
 
         .site-title {
             display: block;
+            padding-left: 0;
+            
+
+        
         }
 
         #side-nav, #main-nav {
             padding: 0; 
+
+            .hamburger {
+                padding: 0;
+                margin-left: 25px;
+            }
         }
 
         .cart-icon {
-            border-left: none;
+            border-left: none !important;
         }
     }
 

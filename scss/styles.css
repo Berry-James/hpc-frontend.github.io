@@ -1604,12 +1604,17 @@ div.signOut-modal {
   }
   .nav-bar .site-title {
     display: block;
+    padding-left: 0;
   }
   .nav-bar #side-nav, .nav-bar #main-nav {
     padding: 0;
   }
+  .nav-bar #side-nav .hamburger, .nav-bar #main-nav .hamburger {
+    padding: 0;
+    margin-left: 25px;
+  }
   .nav-bar .cart-icon {
-    border-left: none;
+    border-left: none !important;
   }
 
   .home-title h1 {

@@ -45,6 +45,9 @@ function cartPageController(){
                         User.removePartFromCart(partObj.data._id);
                         partsListDiv.removeChild(partObj.el);
                         User.cartCount --;
+                        preTax -= part.price;
+                        calcs();
+
                     });
                     partObj.el.appendChild(removeBtn);
                 partsListDiv.appendChild(partObj.el);
@@ -57,14 +60,20 @@ function cartPageController(){
                 delay: anime.stagger(150)
             })
 
-            let tax = preTax * 0.1;
-            let postTax = preTax * 1.1;
-            const preTaxBox = document.querySelector("#preTax");
-            preTaxBox.innerText = `Before tax: ${preTax.toFixed(2)}`;
-            const taxBox = document.querySelector("#tax");
-            taxBox.innerText = `+ Tax: ${tax.toFixed(2)}`;
-            const postTaxBox = document.querySelector("#postTax");
-            postTaxBox.innerText = `Total: $${postTax.toFixed(2)}`;
+            function calcs() {
+                let tax = preTax * 0.1;
+                let postTax = preTax * 1.1;
+                const preTaxBox = document.querySelector("#preTax");
+                preTaxBox.innerText = `Before tax: ${preTax.toFixed(2)}`;
+                const taxBox = document.querySelector("#tax");
+                taxBox.innerText = `+ Tax: ${tax.toFixed(2)}`;
+                const postTaxBox = document.querySelector("#postTax");
+                postTaxBox.innerText = `Total: $${postTax.toFixed(2)}`;
+            }
+
+            calcs();
+
+
 
         })
         .catch(err => {
