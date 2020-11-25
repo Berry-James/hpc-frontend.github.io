@@ -452,15 +452,11 @@
 }
 
 .query-div {
-  grid-row-start: 2;
-  grid-row-end: 2;
-  grid-column-start: 2;
-  grid-column-end: 2;
-  height: 1.1rem;
-  display: none;
+  margin-bottom: 20px;
 }
 .query-div .query {
   margin: 0;
+  padding-left: 10px;
 }
 
 .filter-container {
@@ -1484,6 +1480,24 @@ div.signOut-modal {
     padding: 1rem 0;
   }
 
+  .sign-page {
+    overflow: auto;
+  }
+  .sign-page .sign-in-bg-wrap {
+    overflow: auto;
+  }
+  .sign-page .signIn-switch {
+    animation: none !important;
+  }
+  .sign-page .signIn-switch .form-right {
+    animation: none !important;
+  }
+  .sign-page .signIn-switch .form-left {
+    animation: none !important;
+  }
+  .sign-page .signUp-switch {
+    animation: none !important;
+  }
   .sign-page .form-wrapper {
     width: 100vw;
     grid-template-rows: 30% 1fr;
@@ -1501,11 +1515,18 @@ div.signOut-modal {
     grid-column-start: 1;
     grid-row-start: 2;
   }
+  .sign-page .form-wrapper .form-left .input {
+    margin: 15px 0;
+    background-color: #ededed;
+  }
+  .sign-page .form-wrapper .form-left .field {
+    margin-right: 0px;
+  }
   .sign-page .form-wrapper .form-left .create_acc {
     margin: 0 auto;
   }
   .sign-page .form-wrapper .form-left .signIn-btn {
-    width: 80%;
+    width: 80vw;
     text-align: center;
     margin: 0 auto;
     display: flex;

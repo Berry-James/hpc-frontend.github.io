@@ -27,15 +27,10 @@
 }
 
 .query-div {
-    grid-row-start: 2;
-    grid-row-end: 2;
-    grid-column-start: 2;
-    grid-column-end: 2;
-    height: 1.1rem;
-    display: none;
-
+    margin-bottom: 20px;
     .query {
         margin: 0;
+        padding-left: 10px;
     }
 }
 

@@ -240,9 +240,8 @@ function partsPageController(){
 
             
             queryDiv.style.display = 'block';
-            query.innerText = `Searching for: ${searchVal}`;
-/*             Loader.remove(partsListDiv);
- */ 
+            query.innerHTML = `Searching for: <strong>${searchVal}</strong>`;
+
             })
         })
     }

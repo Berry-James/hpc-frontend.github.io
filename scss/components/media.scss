@@ -183,6 +183,27 @@
     
     // SIGN IN PAGE
     .sign-page {
+        overflow: auto;
+
+        .sign-in-bg-wrap {
+            overflow: auto;
+        }
+
+        .signIn-switch {
+            animation: none !important;
+
+            .form-right {
+                animation: none !important;
+            }
+
+            .form-left {
+                animation: none !important;
+            }
+        }
+
+        .signUp-switch {
+            animation: none !important;
+        }
         .form-wrapper {
             width: 100vw;
             grid-template-rows: 30% 1fr;
@@ -201,6 +222,14 @@
                 grid-column-start: 1;
                 grid-row-start: 2;
 
+                .input {
+                    margin: 15px 0;
+                    background-color: #ededed;
+                }
+
+                .field {
+                    margin-right: 0px;
+                }
 
 
                 .create_acc {
@@ -208,7 +237,7 @@
                 }
                 
                 .signIn-btn {
-                    width: 80%;
+                    width: 80vw;
                     text-align: center;
                     margin: 0 auto;
                     display: flex;
