@@ -95,6 +95,10 @@
     background-color: $dark;
     padding-top: 100px;
 
+    .burger-prof-btn-hide {
+        display: none;
+    }
+
     a {
         font-size: 1.5rem;
         border-bottom: 1px solid rgb(72, 72, 72);
@@ -119,3 +123,4 @@
     transform: rotate(90deg);
     filter: invert(1);
 }
+

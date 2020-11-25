@@ -52,7 +52,8 @@ const Burger = {
             }
 
             if(Auth.authenticated) {
-
+                const profBtn = document.querySelector(".burger-prof-btn");
+                profBtn.classList.remove("burger-prof-btn-hide");
                 const burgerSign = document.querySelector(".burger-sign");
                 burgerSign.icon = burgerSign.querySelector("i");
                 burgerSign.span = burgerSign.querySelector("span");

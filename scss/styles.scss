@@ -72,10 +72,6 @@ p {
   
 }
 
-
-
-
-
 .page-content.hidden {
   top: -20%;
   opacity: 0;
@@ -229,7 +225,9 @@ p {
 }
 
 #cart-count {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   transform: translateX(-10px) translateY(-10px);
   width: 20px;

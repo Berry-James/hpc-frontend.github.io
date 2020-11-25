@@ -156,6 +156,9 @@
   background-color: #0E1116;
   padding-top: 100px;
 }
+.burger-content .burger-prof-btn-hide {
+  display: none;
+}
 .burger-content a {
   font-size: 1.5rem;
   border-bottom: 1px solid #484848;
@@ -847,6 +850,9 @@
   font-size: 1.2rem;
   width: fit-content;
   background: #0E1116;
+}
+.part-modal .cart-btn i {
+  margin-right: 15px;
 }
 
 /* Modal */
@@ -1803,7 +1809,9 @@ p {
 }
 
 #cart-count {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   transform: translateX(-10px) translateY(-10px);
   width: 20px;
