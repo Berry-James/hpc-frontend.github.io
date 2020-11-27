@@ -21,7 +21,7 @@ const Nav = {
     }, */
 
     events: () => {
-        const linksContainer = document.querySelector(".drop-contents");
+/*         const linksContainer = document.querySelector(".drop-contents");
         const links = linksContainer.querySelectorAll("a");
         let partsStorage = [];
 
@@ -42,7 +42,7 @@ const Nav = {
                     
                 })
             })
-        })
+        }) */
 
         
     },

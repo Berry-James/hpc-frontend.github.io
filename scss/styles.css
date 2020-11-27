@@ -1064,7 +1064,7 @@ div.signOut-modal {
   overflow: hidden;
 }
 .sign-page .sign-in-bg {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../imgs/main-img.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../imgs/main-img.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center right;
@@ -1086,7 +1086,7 @@ div.signOut-modal {
   overflow: hidden;
 }
 .page-signup .sign-in-bg {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../imgs/main-img.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../imgs/main-img.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center right;
@@ -2330,6 +2330,7 @@ a {
   z-index: 2;
   transition: 0.2s;
   font-family: "Inter", sans-serif;
+  display: none;
 }
 .main-search-wrapper i {
   transform: translateX(25px);
