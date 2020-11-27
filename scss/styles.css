@@ -1096,10 +1096,6 @@ div.signOut-modal {
   transform: scale(1.1);
 }
 
-.field {
-  margin-bottom: 1rem;
-}
-
 .input {
   font-size: 1rem;
   padding: 0.8rem 1rem 0.8rem 0.4rem;
@@ -1108,9 +1104,7 @@ div.signOut-modal {
   color: #0E1116;
   animation: 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 1 inputFade;
   line-height: 100%;
-  background: transparent;
-  /*     border-bottom: 3px solid $dark;
-   */
+  background: #e9e9e9;
 }
 
 .input:focus {
